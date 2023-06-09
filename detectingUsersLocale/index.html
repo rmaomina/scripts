@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+</head>
+
+<body>
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <script>
+    const getBrowserLocales = (options = {}) => {
+      const defaultOptions = {
+        languageCodeOnly: false,
+      };
+
+      const opt = {
+        ...defaultOptions,
+        ...options,
+      };
+
+      const browserLocales =
+        navigator.languages === undefined
+          ? [navigator.language]
+          : navigator.languages;
+
+      if (!browserLocales) {
+        return undefined;
+      }
+
+      return browserLocales.map(locale => {
+        const trimmedLocale = locale.trim();
+        return opt.languageCodeOnly
+          ? trimmedLocale.split(/-|_/)[0]
+          : trimmedLocale;
+      });
+    };
+
+    const userLocales = getBrowserLocales({});
+    console.log(...userLocales);
+    document.body.querySelector('#test1').textContent = 'userLocales: ' + userLocales.join(',');
+
+    // if (userLocales.includes("en-CA")) {
+    //   window.location.assign("https://www.discoverfamilyhub.com/ca_en");
+
+    // } else if (userLocales.includes("en-GB")) {
+    //   window.location.assign("https://www.discoverfamilyhub.com/gb");
+
+    // } else if (userLocales.includes("de-DE")) {
+    //   window.location.assign("https://www.discoverfamilyhub.com/de");
+
+    // } else if (userLocales.includes("it-IT")) {
+    //   window.location.assign("https://www.discoverfamilyhub.com/it");
+
+    // } else if (userLocales.includes("fr-FR")) {
+    //   window.location.assign("https://www.discoverfam`ilyhub.com/fr");
+
+    // } else if (userLocales.includes("es-MX")) {
+    //   window.location.assign("https://www.discoverfamilyhub.com/mx_en");
+
+    // } else if (userLocales.includes("en-AU")) {
+    //   window.location.assign("https://www.discoverfamilyhub.com/au");
+
+    // } else if (userLocales.includes("en-IN")) {
+    //   window.location.assign("https://www.discoverfamilyhub.com/in");
+
+    // } else {
+    //   window.location.assign("https://www.discoverfamilyhub.com/kr");
+    // }
+
+  </script>
+</body>
+
+</html>
